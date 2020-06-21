@@ -1,23 +1,28 @@
 package encryptdecrypt;
 /**
- * @version 0.1
+ * @version 0.2
  * @author github.com/jan00sh
  * @since 21-06-2020
  */
 public class Main {
     public static void main(String[] args) {
-        boolean shift = true;
+        String algorithm = "shift";
         boolean mode = true;
         String data = "";
-        String source = "";
-        String input = "";
+        String source = null;
+        String output = null;
         int key = 0;
 
         for (int i = 0; i < args.length - 1; i++) {
             switch(args[i]) {
                 case "-mode":
+                    if (args[i+1].toLowerCase().equals("dec")) {
+                        mode = false;
+                    }
+                    break;
+                case "-alg":
                     if (args[i+1].toLowerCase().equals("unicode")) {
-                        shift = false;
+                        algorithm = "unicode";
                     }
                     break;
                 case "-key":
@@ -34,9 +39,13 @@ public class Main {
                     source = args[i+1];
                     break;
                 case "-out":
-                    input = args[i+1];
+                    output = args[i+1];
                     break;
             }
+            if (source != null) {
+                data = InputFromFile.inputFromFile(source);
+            }
+            System.out.println(Display.displayResult(Processor.getResult(mode, algorithm, data, key), output));
         }
     }
 }
