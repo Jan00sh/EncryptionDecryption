@@ -9,7 +9,7 @@ public class Unicode extends Cipher {
     public String enc() {
         String result = "";
         for (char character : data.toCharArray()) {
-            result += character + key;
+            result += (char) ((int) character + key);
         }
         return result;
     }
@@ -18,7 +18,7 @@ public class Unicode extends Cipher {
     public String dec() {
         String result = "";
         for (char character : data.toCharArray()) {
-            result += character - key;
+            result += (char) ((int)character - key);
         }
         return result;
     }

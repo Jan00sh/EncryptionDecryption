@@ -8,19 +8,21 @@ public class Shift extends Cipher {
     @Override
     public String enc() {
         String result = "";
-        for (char character : data.toCharArray()) {
+        for (int character : data.toCharArray()) {
              if (character >= 65 && character <= 90) {
                  if (character + key > 90) {
-                     result += (Math.abs(character + key - 90) + 65);
+                     result += (char) (Math.abs(character + key - 90) + 64);
                  } else {
-                     result += character + key;
+                     result += (char) (character + key);
                  }
              } else if (character >= 97 && character <= 122) {
                  if (character + key >= 122) {
-                     result += (Math.abs(character + key - 122) + 97);
+                     result += (char) (Math.abs(character + key - 122) + 96);
                  } else {
-                     result += character + key;
+                     result += (char) (character + key);
                  }
+             } else {
+                 result += (char) character;
              }
         }
         return result;
@@ -29,19 +31,21 @@ public class Shift extends Cipher {
     @Override
     public String dec() {
         String result = "";
-        for (char character : data.toCharArray()) {
+        for (int character : data.toCharArray()) {
             if (character >= 65 && character <= 90) {
-                if (character - key <= 65) {
-                    result += (Math.abs(character + key - 65) - 90);
+                if (character - key < 65) {
+                    result += (char) (90 + (character - 64 - key));
                 } else {
-                    result += character - key;
+                    result += (char) (character - key);
                 }
             } else if (character >= 97 && character <= 122) {
-                if (character - key <= 97) {
-                    result += (Math.abs(character + key - 97) - 122);
+                if (character - key < 97) {
+                    result += (char) (122 + (character - 96 - key));
                 } else {
-                    result += character - key;
+                    result += (char) (character - key);
                 }
+            } else {
+                result += (char) character;
             }
         }
         return result;

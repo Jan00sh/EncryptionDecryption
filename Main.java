@@ -1,6 +1,6 @@
 package encryptdecrypt;
 /**
- * @version 0.2
+ * @version 1.0
  * @author github.com/jan00sh
  * @since 21-06-2020
  */
@@ -46,6 +46,7 @@ public class Main {
                 data = InputFromFile.inputFromFile(source);
             }
             System.out.println(Display.displayResult(Processor.getResult(mode, algorithm, data, key), output));
+            System.out.println(data);
         }
     }
 }
